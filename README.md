@@ -1,11 +1,12 @@
 # Task Management System
 
-This is a simple Task Management System built using HTML, CSS, and JavaScript.
+This is a simple Task Management System built using HTML, CSS, JavaScript and Github pages.
 
-## Features:
-
-- Add tasks with titles and descriptions.
-- View the list of added tasks.
+## Features
+- Add a new task with a title and description.
+- Mark tasks as complete.
+- Edit existing tasks.
+- Delete tasks.
 
 ## How to Run
 
