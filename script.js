@@ -1,10 +1,13 @@
 document.getElementById('task-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    // Get task title and description
+    // Get task title, description, due date, and category
     const title = document.getElementById('task-title').value;
     const description = document.getElementById('task-description').value;
+    const dueDate = document.getElementById('task-due-date').value;
+    const category = document.getElementById('task-category').value;
 
+    // Validate input
     if (title === '' || description === '') {
         alert('Please enter both a task title and description.');
         return;
@@ -15,7 +18,7 @@ document.getElementById('task-form').addEventListener('submit', function(event) 
 
     // Create the task content
     const taskContent = document.createElement('span');
-    taskContent.textContent = `${title}: ${description}`;
+    taskContent.innerHTML = `<strong>${title}</strong>: ${description} <br> <em>Due: ${dueDate} | Category: ${category}</em>`;
     listItem.appendChild(taskContent);
 
     // Create a check button (task complete)
@@ -42,6 +45,8 @@ document.getElementById('task-form').addEventListener('submit', function(event) 
     // Clear the input fields
     document.getElementById('task-title').value = '';
     document.getElementById('task-description').value = '';
+    document.getElementById('task-due-date').value = '';
+    document.getElementById('task-category').value = '';
 
     // Event listener for marking tasks as complete
     checkButton.addEventListener('click', function() {
@@ -52,10 +57,12 @@ document.getElementById('task-form').addEventListener('submit', function(event) 
     editButton.addEventListener('click', function() {
         const newTitle = prompt('Edit task title:', title);
         const newDescription = prompt('Edit task description:', description);
-        if (newTitle !== null && newDescription !== null) {
-            taskContent.textContent = `${newTitle}: ${newDescription}`;
+        const newDueDate = prompt('Edit due date:', dueDate);
+        const newCategory = prompt('Edit category:', category);
+        if (newTitle !== null && newDescription !== null && newDueDate !== null && newCategory !== null) {
+            taskContent.innerHTML = `<strong>${newTitle}</strong>: ${newDescription} <br> <em>Due: ${newDueDate} | Category: ${newCategory}</em>`;
         }
-    });
+    }); // Close the edit button listener correctly
 
     // Event listener for deleting tasks
     deleteButton.addEventListener('click', function() {
