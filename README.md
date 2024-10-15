@@ -3,7 +3,7 @@
 This is a simple Task Management System built using HTML, CSS, JavaScript and Github pages.
 
 ## Features
-- Add a new task with a title and description.
+- Add a new task with a title and description, due date and task category(e.g., Work, Personal, Urgent, Others) .
 - Mark tasks as complete.
 - Edit existing tasks.
 - Delete tasks.
