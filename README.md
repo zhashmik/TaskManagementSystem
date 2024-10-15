@@ -2,7 +2,7 @@
 
 This is a simple Task Management System built using HTML, CSS, and JavaScript.
 
-## Features
+## Features:
 
 - Add Tasks: Users can create new tasks with a title and description.
 - Edit Tasks: Users can modify existing tasks to update their details.
