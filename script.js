@@ -81,6 +81,10 @@ function addTaskToList(task) {
     checkButton.innerHTML = '<i class="fas fa-check"></i>';
     checkButton.classList.add('complete-btn');
 
+    const editButton = document.createElement('button');
+    editButton.innerHTML = '<i class="fas fa-edit"></i>';
+    editButton.classList.add('edit-btn');
+
     const deleteButton = document.createElement('button');
     deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
     deleteButton.classList.add('delete-btn');
@@ -95,10 +99,32 @@ function addTaskToList(task) {
         removeTaskFromLocalStorage(task.title);
     });
 
+    editButton.addEventListener('click', function() {
+        editTask(task.title);
+    });
+
     listItem.appendChild(checkButton);
+    listItem.appendChild(editButton);
     listItem.appendChild(deleteButton);
 
     document.getElementById('task-list').appendChild(listItem);
+}
+
+function editTask(taskTitle) {
+    let tasks = getTasksFromLocalStorage();
+    let taskToEdit = tasks.find(task => task.title === taskTitle);
+
+    if (taskToEdit) {
+        document.getElementById('task-title').value = taskToEdit.title;
+        document.getElementById('task-description').value = taskToEdit.description;
+        document.getElementById('task-due-date').value = taskToEdit.dueDate;
+        document.getElementById('task-category').value = taskToEdit.category;
+        document.getElementById('task-priority').value = taskToEdit.priority;
+
+        // Remove the old task
+        removeTaskFromLocalStorage(taskToEdit.title);
+        document.querySelector(`li:contains("${taskTitle}")`).remove(); // Remove from UI
+    }
 }
 
 // Local storage functions

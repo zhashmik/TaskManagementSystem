@@ -1,10 +1,11 @@
 /* General body styling */
 body {
-    font-family: 'Poppins', sans-serif; 
+    font-family: 'Poppins', sans-serif;
     background-color: #f7f9fc;
     margin: 0;
     padding: 20px;
-    color: #2c3e50; 
+    color: #2c3e50;
+    font-size: 10px; /* Set global font size */
 }
 
 /* Container Styling */
@@ -12,87 +13,69 @@ body {
     max-width: 700px;
     margin: 0 auto;
     background: #ffffff;
-    padding: 30px;
+    padding: 15px; /* Reduced padding */
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-}
-
-.container:hover {
-    transform: scale(1.02);
 }
 
 /* Heading Styles */
 h1, h2 {
     text-align: center;
-    color: #34495e; 
-    font-weight: 700; 
-    margin-bottom: 20px;
+    color: #34495e;
+    font-weight: 700;
+    margin-bottom: 10px; /* Reduced margin */
     letter-spacing: 1px;
+    font-size: 12px; /* Reduced heading size */
 }
 
 /* Form Styling */
 form {
     display: flex;
     flex-direction: column;
-    margin-bottom: 25px;
+    margin-bottom: 15px; /* Reduced margin */
 }
 
-input, textarea {
-    margin-bottom: 15px;
-    padding: 15px;
+input, textarea, select {
+    margin-bottom: 10px; /* Reduced margin */
+    padding: 8px; /* Reduced padding */
     border: 1px solid #bdc3c7;
-    border-radius: 8px;
+    border-radius: 5px; /* Reduced border-radius */
     background-color: #ecf0f1;
-    font-size: 12px;
+    font-size: 10px; /* Reduced font size */
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    font-family: 'Poppins', sans-serif; 
 }
 
 input:focus, textarea:focus {
     border-color: #9b59b6;
-    box-shadow: 0 0 8px rgba(155, 89, 182, 0.5); 
+    box-shadow: 0 0 8px rgba(155, 89, 182, 0.5);
     outline: none;
 }
 
 /* Search Bar Styling */
 #search-task {
-    padding: 10px;
+    padding: 8px; /* Reduced padding */
     width: 100%;
     border: 1px solid #bdc3c7;
     border-radius: 5px;
-    font-size: 10px; 
-    margin-bottom: 20px;
+    font-size: 10px; /* Reduced font size */
+    margin-bottom: 15px; /* Reduced margin */
     background-color: #f0f4f8;
 }
 
 /* Button Styling */
 button {
-    padding: 10px 15px; 
-    background-color: #3498db; 
+    padding: 5px 10px; /* Reduced padding */
+    background-color: #3498db;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 10px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 10px; /* Reduced font size */
     font-family: 'Poppins', sans-serif;
 }
 
 button:hover {
     background-color: #2980b9;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
-
-/* Filter Button Styling */
-button.filter-btn {
-    margin-right: 10px;
-    margin-bottom: 10px;
-}
-
-button.filter-btn:hover {
-    background-color: #27ae60; 
 }
 
 /* Task List Styling */
@@ -103,119 +86,52 @@ ul {
 
 li {
     background: #f0f4f8;
-    padding: 15px;
-    margin-bottom: 15px;
+    padding: 10px; /* Reduced padding */
+    margin-bottom: 10px; /* Reduced margin */
     border-radius: 8px;
-    position: relative;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: background-color 0.3s ease;
-    font-family: 'Poppins', sans-serif;
+    font-size: 10px; /* Reduced font size */
 }
 
-/* Icon before task items */
-li:before {
-    content: '\f058';
-    font-family: 'FontAwesome';
-    color: #2ecc71;
-    font-size: 16px;
-    position: absolute;
-    left: -30px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-/* Completed task styling */
-li.completed {
-    text-decoration: line-through;
-    color: #95a5a6;
-    background-color: #e5e7ea;
-    transition: color 0.3s ease, background-color 0.3s ease;
-}
-
-.completed {
-    opacity: 0.7;
-}
-
-/* Action Buttons (complete, edit, delete) */
+/* Action Buttons */
 .complete-btn, .edit-btn, .delete-btn {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 16px;
-    margin-left: 10px;
-    transition: color 0.3s ease;
-    color: #7f8c8d; 
-    visibility: visible;
+    font-size: 10px;
+    margin-left: 5px;
+    color: #7f8c8d;
 }
 
-.complete-btn:hover, .edit-btn:hover, .delete-btn:hover {
-    color: #34495e; 
-}
-
-/* Updated Action Buttons Styling */
 .complete-btn {
-    color: #27ae60; 
-}
-
-.complete-btn:hover {
-    color: #2ecc71;
+    color: #27ae60;
 }
 
 .edit-btn {
-    color: #f39c12; 
-}
-
-.edit-btn:hover {
-    color: #e67e22;
+    color: #f39c12;
 }
 
 .delete-btn {
-    color: #e74c3c; 
+    color: #e74c3c;
 }
 
-.delete-btn:hover {
-    color: #c0392b;
+/* Completed Tasks */
+.completed {
+    text-decoration: line-through;
+    color: #95a5a6;
 }
 
-/* Style for the date input */
-input[type="date"] {
-    margin-bottom: 15px;
-    padding: 12px;
-    border: 1px solid #bdc3c7;
-    border-radius: 5px;
-    background-color: #ecf0f1;
-    font-size: 16px;
+/* Priority Classes */
+.low-priority {
+    border-left: 5px solid #27ae60;
 }
 
-/* Style for the select input */
-select {
-    margin-bottom: 15px;
-    padding: 12px;
-    border: 1px solid #bdc3c7;
-    border-radius: 5px;
-    background-color: #ecf0f1;
-    font-size: 16px;
+.medium-priority {
+    border-left: 5px solid #f39c12;
 }
 
-/* Footer Styling */
-footer {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 14px;
-    color: #7f8c8d;
-    font-family: 'Poppins', sans-serif;
-}
-
-footer a {
-    color: #3498db;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-footer a:hover {
-    text-decoration: underline;
-    color: #2980b9;
+.high-priority {
+    border-left: 5px solid #e74c3c;
 }
