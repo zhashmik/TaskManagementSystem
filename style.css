@@ -7,6 +7,7 @@ body {
     color: #2c3e50; 
 }
 
+/* Container Styling */
 .container {
     max-width: 700px;
     margin: 0 auto;
@@ -37,38 +38,61 @@ form {
     margin-bottom: 25px;
 }
 
-input, textarea, select {
+input, textarea {
     margin-bottom: 15px;
-    padding: 12px;
+    padding: 15px;
     border: 1px solid #bdc3c7;
     border-radius: 8px;
     background-color: #ecf0f1;
     font-size: 16px;
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
     font-family: 'Poppins', sans-serif; 
 }
 
-input:focus, textarea:focus, select:focus {
+input:focus, textarea:focus {
     border-color: #9b59b6;
     box-shadow: 0 0 8px rgba(155, 89, 182, 0.5); 
     outline: none;
 }
 
+/* Search Bar Styling */
+#search-task {
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    font-size: 14px; /* Smaller font size */
+    margin-bottom: 20px;
+    background-color: #f0f4f8;
+}
+
+/* Button Styling */
 button {
-    padding: 12px;
-    background-color: #9b59b6;
+    padding: 10px 15px; /* Adjusted padding */
+    background-color: #3498db; /* Different color (blue) */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px; /* Smaller font size */
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     font-family: 'Poppins', sans-serif;
 }
 
 button:hover {
-    background-color: #8e44ad; 
+    background-color: #2980b9; /* Darker blue on hover */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Filter Button Styling */
+button.filter-btn {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+button.filter-btn:hover {
+    background-color: #27ae60; /* Green when hovered */
 }
 
 /* Task List Styling */
@@ -87,18 +111,20 @@ li {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: background-color 0.3s ease;
     font-family: 'Poppins', sans-serif;
 }
 
-/* Task priority colors */
-.high-priority {
-    border-left: 4px solid #e74c3c;
-}
-.medium-priority {
-    border-left: 4px solid #f39c12;
-}
-.low-priority {
-    border-left: 4px solid #27ae60;
+/* Icon before task items */
+li:before {
+    content: '\f058';
+    font-family: 'FontAwesome';
+    color: #2ecc71;
+    font-size: 16px;
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 /* Completed task styling */
@@ -109,7 +135,11 @@ li.completed {
     transition: color 0.3s ease, background-color 0.3s ease;
 }
 
-/* Button styling for actions (complete, edit, delete) */
+.completed {
+    opacity: 0.7;
+}
+
+/* Action Buttons (complete, edit, delete) */
 .complete-btn, .edit-btn, .delete-btn {
     background: none;
     border: none;
@@ -124,6 +154,67 @@ li.completed {
     color: #34495e; 
 }
 
+/* Updated Action Buttons Styling */
+.complete-btn {
+    color: #27ae60; /* Green for the complete button */
+}
+
+.complete-btn:hover {
+    color: #2ecc71;
+}
+
+.edit-btn {
+    color: #f39c12; /* Orange for the edit button */
+}
+
+.edit-btn:hover {
+    color: #e67e22;
+}
+
+.delete-btn {
+    color: #e74c3c; /* Red for the delete button */
+}
+
 .delete-btn:hover {
-    color: #e74c3c; 
+    color: #c0392b;
+}
+
+/* Style for the date input */
+input[type="date"] {
+    margin-bottom: 15px;
+    padding: 12px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    background-color: #ecf0f1;
+    font-size: 16px;
+}
+
+/* Style for the select input */
+select {
+    margin-bottom: 15px;
+    padding: 12px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    background-color: #ecf0f1;
+    font-size: 16px;
+}
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #7f8c8d;
+    font-family: 'Poppins', sans-serif;
+}
+
+footer a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color: #2980b9;
 }
