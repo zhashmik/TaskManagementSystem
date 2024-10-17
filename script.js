@@ -46,6 +46,10 @@ document.getElementById('search-task').addEventListener('input', function() {
     });
 });
 
+// Filter buttons event listeners
+document.getElementById('filter-all').addEventListener('click', function() {
+    filterTasks('');
+});
 document.getElementById('filter-work').addEventListener('click', function() {
     filterTasks('Work');
 });
@@ -54,9 +58,6 @@ document.getElementById('filter-personal').addEventListener('click', function() 
 });
 document.getElementById('filter-urgent').addEventListener('click', function() {
     filterTasks('Urgent');
-});
-document.getElementById('filter-all').addEventListener('click', function() {
-    filterTasks('');
 });
 
 function filterTasks(category) {
@@ -79,3 +80,61 @@ function addTaskToList(task) {
     const checkButton = document.createElement('button');
     checkButton.innerHTML = '<i class="fas fa-check"></i>';
     checkButton.classList.add('complete-btn');
+
+    const deleteButton = document.createElement('button');
+    deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+    deleteButton.classList.add('delete-btn');
+
+    checkButton.addEventListener('click', function() {
+        listItem.classList.toggle('completed');
+        updateTaskCompletionStatus(task.title);
+    });
+
+    deleteButton.addEventListener('click', function() {
+        listItem.remove();
+        removeTaskFromLocalStorage(task.title);
+    });
+
+    listItem.appendChild(checkButton);
+    listItem.appendChild(deleteButton);
+
+    document.getElementById('task-list').appendChild(listItem);
+}
+
+// Local storage functions
+function saveTaskToLocalStorage(task) {
+    let tasks = getTasksFromLocalStorage();
+    tasks.push(task);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+function loadTasksFromStorage() {
+    let tasks = getTasksFromLocalStorage();
+    tasks.forEach(addTaskToList);
+}
+
+function getTasksFromLocalStorage() {
+    let tasks;
+    if (localStorage.getItem('tasks') === null) {
+        tasks = [];
+    } else {
+        tasks = JSON.parse(localStorage.getItem('tasks'));
+    }
+    return tasks;
+}
+
+function removeTaskFromLocalStorage(taskTitle) {
+    let tasks = getTasksFromLocalStorage();
+    tasks = tasks.filter(task => task.title !== taskTitle);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+function updateTaskCompletionStatus(taskTitle) {
+    let tasks = getTasksFromLocalStorage();
+    tasks.forEach(task => {
+        if (task.title === taskTitle) {
+            task.completed = !task.completed;
+        }
+    });
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
