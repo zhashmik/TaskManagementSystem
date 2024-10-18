@@ -79,7 +79,7 @@ document.getElementById('filter-personal').addEventListener('click', function() 
 document.getElementById('filter-urgent').addEventListener('click', function() {
     filterTasks('Urgent');
 });
-document.getElementById('filter-urgent').addEventListener('click', function() {
+document.getElementById('filter-others').addEventListener('click', function() {
     filterTasks('Others');
 });
 
