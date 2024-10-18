@@ -39,7 +39,19 @@ document.getElementById('task-form').addEventListener('submit', function(event) 
     // Reset form
     document.getElementById('task-form').reset();
 });
-
+//sort task by due date
+function sortTasksByDueDate() {
+    const tasks = getTasksFromLocalStorage();
+    tasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate)); // Sort by due date
+    clearTaskList(); // Clear existing list
+    tasks.forEach(task => addTaskToList(task)); // Re-add sorted tasks to the list
+}
+function clearTaskList() {
+    const taskList = document.getElementById('task-list');
+    while (taskList.firstChild) {
+        taskList.removeChild(taskList.firstChild);
+    }
+}
 // Search functionality
 document.getElementById('search-task').addEventListener('input', function() {
     const searchValue = this.value.toLowerCase();
@@ -79,6 +91,22 @@ function filterTasks(category) {
         }
     });
 }
+// Function to insert task in order based on due date
+function insertTaskInOrder(listItem, dueDate) {
+    const taskList = document.getElementById('task-list');
+    const tasks = Array.from(taskList.children);
+    
+    // Find the correct position to insert the new task
+    for (let i = 0; i < tasks.length; i++) {
+        const currentDueDate = tasks[i].querySelector('em').textContent.match(/Due: (.+) \|/)[1];
+        if (new Date(dueDate) < new Date(currentDueDate)) {
+            taskList.insertBefore(listItem, tasks[i]);
+            return; // Exit the function after inserting
+        }
+    }
+    // If the new task is the latest, append it to the end
+    taskList.appendChild(listItem);
+}
 
 function addTaskToList(task) {
     const listItem = document.createElement('li');
@@ -117,14 +145,15 @@ function addTaskToList(task) {
     taskButtons.appendChild(checkButton);
     taskButtons.appendChild(editButton);
     taskButtons.appendChild(deleteButton);
-
     listItem.appendChild(taskButtons);
-    document.getElementById('task-list').appendChild(listItem);
 
     // Mark the task as completed in the UI if it's already completed
     if (task.completed) {
         listItem.classList.add('completed');
     }
+
+    // Insert the new task in the correct position based on due date
+    insertTaskInOrder(listItem, task.dueDate);
 }
 
 function updateTaskInList(originalTask, updatedTask) {
@@ -177,7 +206,7 @@ function updateTaskInLocalStorage(originalTask, updatedTask) {
     let tasks = getTasksFromLocalStorage();
     tasks = tasks.map(task => {
         if (task.title === originalTask.title) {
-            return updatedTask; // Return the updated task
+            return updatedTask; // Update the task
         }
         return task; // Keep the original task
     });
@@ -192,7 +221,7 @@ function editTask(task) {
     document.getElementById('task-priority').value = task.priority;
 
     // Set the current task being edited
-    editingTask = task;
+    editingTask = task; // This stores the reference to the task being edited
 }
 
 // Local storage functions
@@ -203,8 +232,11 @@ function saveTaskToLocalStorage(task) {
 }
 
 function loadTasksFromStorage() {
-    let tasks = getTasksFromLocalStorage();
-    tasks.forEach(addTaskToList);
+    const tasks = getTasksFromLocalStorage();
+    tasks.forEach(task => {
+        addTaskToList(task);
+    });
+    sortTasksByDueDate(); // Sort tasks after loading
 }
 
 function getTasksFromLocalStorage() {
