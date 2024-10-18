@@ -80,7 +80,7 @@ document.getElementById('filter-urgent').addEventListener('click', function() {
     filterTasks('Urgent');
 });
 document.getElementById('filter-urgent').addEventListener('click', function() {
-    filterTasks('Other');
+    filterTasks('Others');
 });
 
 function filterTasks(category) {
