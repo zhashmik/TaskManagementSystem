@@ -79,6 +79,9 @@ document.getElementById('filter-personal').addEventListener('click', function() 
 document.getElementById('filter-urgent').addEventListener('click', function() {
     filterTasks('Urgent');
 });
+document.getElementById('filter-urgent').addEventListener('click', function() {
+    filterTasks('Other');
+});
 
 function filterTasks(category) {
     const tasks = document.querySelectorAll('#task-list li');
