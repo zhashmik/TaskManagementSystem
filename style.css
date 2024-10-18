@@ -71,8 +71,19 @@ li {
     align-items: center;
 }
 
+li.completed {
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+/* Task details styling */
+.task-details {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
 /* Buttons inside each task item */
-.complete-btn, .edit-btn, .delete-btn {
+button.complete-btn, button.edit-btn, button.delete-btn {
     background: none;
     border: none;
     cursor: pointer;
@@ -81,14 +92,20 @@ li {
     color: #7f8c8d;
 }
 
-.complete-btn:hover {
+button.complete-btn:hover {
     color: #2ecc71;
 }
 
-.edit-btn:hover {
+button.edit-btn:hover {
     color: #e67e22;
 }
 
-.delete-btn:hover {
+button.delete-btn:hover {
     color: #e74c3c;
+}
+
+.task-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }

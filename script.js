@@ -26,11 +26,8 @@ document.getElementById('task-form').addEventListener('submit', function(event) 
     addTaskToList(task);
     saveTaskToLocalStorage(task);
 
-    document.getElementById('task-title').value = '';
-    document.getElementById('task-description').value = '';
-    document.getElementById('task-due-date').value = '';
-    document.getElementById('task-category').value = '';
-    document.getElementById('task-priority').value = '';
+    // Reset form
+    document.getElementById('task-form').reset();
 });
 
 // Search functionality
@@ -75,7 +72,10 @@ function filterTasks(category) {
 
 function addTaskToList(task) {
     const listItem = document.createElement('li');
-    listItem.innerHTML = `<span><strong>${task.title}</strong>: ${task.description} <br> <em>Due: ${task.dueDate} | Category: ${task.category}</em></span>`;
+    listItem.innerHTML = `<span class="task-details"><strong>${task.title}</strong>: ${task.description} <br> <em>Due: ${task.dueDate} | Category: ${task.category}</em></span>`;
+
+    const taskButtons = document.createElement('div');
+    taskButtons.classList.add('task-buttons');
 
     const checkButton = document.createElement('button');
     checkButton.innerHTML = '<i class="fas fa-check"></i>';
@@ -101,14 +101,20 @@ function addTaskToList(task) {
     });
 
     editButton.addEventListener('click', function() {
-        editTask(task.title);
+        editTask(task);
     });
 
-    listItem.appendChild(checkButton);
-    listItem.appendChild(editButton);
-    listItem.appendChild(deleteButton);
+    taskButtons.appendChild(checkButton);
+    taskButtons.appendChild(editButton);
+    taskButtons.appendChild(deleteButton);
 
+    listItem.appendChild(taskButtons);
     document.getElementById('task-list').appendChild(listItem);
+
+    // Mark the task as completed in the UI if it's already completed
+    if (task.completed) {
+        listItem.classList.add('completed');
+    }
 }
 
 // Local storage functions
@@ -149,6 +155,13 @@ function updateTaskCompletionStatus(taskTitle) {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
-function editTask(taskTitle) {
-    // Add your edit functionality here (you could repopulate the form inputs and update the task)
+function editTask(task) {
+    document.getElementById('task-title').value = task.title;
+    document.getElementById('task-description').value = task.description;
+    document.getElementById('task-due-date').value = task.dueDate;
+    document.getElementById('task-category').value = task.category;
+    document.getElementById('task-priority').value = task.priority;
+
+    // Remove the old task and update it with the edited one when the form is submitted
+    removeTaskFromLocalStorage(task.title);
 }
