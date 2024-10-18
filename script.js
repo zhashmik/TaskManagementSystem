@@ -1,10 +1,15 @@
+let isEditing = false;  // Track if we are editing a task
+let currentTaskTitle = '';  // To keep track of the current task being edited
+
+// Load tasks from local storage when the DOM is ready
 document.addEventListener('DOMContentLoaded', loadTasksFromStorage);
 
+// Add task form submit event listener
 document.getElementById('task-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    const title = document.getElementById('task-title').value;
-    const description = document.getElementById('task-description').value;
+    const title = document.getElementById('task-title').value.trim();
+    const description = document.getElementById('task-description').value.trim();
     const dueDate = document.getElementById('task-due-date').value;
     const category = document.getElementById('task-category').value;
     const priority = document.getElementById('task-priority').value;
@@ -23,14 +28,22 @@ document.getElementById('task-form').addEventListener('submit', function(event) 
         completed: false
     };
 
-    addTaskToList(task);
-    saveTaskToLocalStorage(task);
+    if (isEditing) {
+        // Remove the original task and replace with updated task
+        updateTask(task);
+    } else {
+        // Add the new task to the list and local storage
+        addTaskToList(task);
+        saveTaskToLocalStorage(task);
+    }
 
-    // Reset form
+    // Reset form and editing state
     document.getElementById('task-form').reset();
+    isEditing = false;
+    currentTaskTitle = '';
 });
 
-// Search functionality
+// Search functionality for filtering tasks
 document.getElementById('search-task').addEventListener('input', function() {
     const searchValue = this.value.toLowerCase();
     const tasks = document.querySelectorAll('#task-list li');
@@ -44,7 +57,7 @@ document.getElementById('search-task').addEventListener('input', function() {
     });
 });
 
-// Filter functionality
+// Filter tasks by category
 document.getElementById('filter-all').addEventListener('click', function() {
     filterTasks('');
 });
@@ -70,10 +83,19 @@ function filterTasks(category) {
     });
 }
 
+// Add a task to the list in the UI
 function addTaskToList(task) {
     const listItem = document.createElement('li');
-    listItem.innerHTML = `<span class="task-details"><strong>${task.title}</strong>: ${task.description} <br> <em>Due: ${task.dueDate} | Category: ${task.category}</em></span>`;
+    listItem.classList.add('task-item');
+    listItem.innerHTML = `
+        <span class="task-details">
+            <strong>${task.title}</strong>: ${task.description}
+            <br>
+            <em>Due: ${task.dueDate} | Category: ${task.category}</em>
+        </span>
+    `;
 
+    // Create buttons for each task
     const taskButtons = document.createElement('div');
     taskButtons.classList.add('task-buttons');
 
@@ -117,6 +139,13 @@ function addTaskToList(task) {
     }
 }
 
+// Update an existing task
+function updateTask(task) {
+    removeTaskFromLocalStorage(currentTaskTitle); 
+    addTaskToList(task); 
+    saveTaskToLocalStorage(task); 
+}
+
 // Local storage functions
 function saveTaskToLocalStorage(task) {
     let tasks = getTasksFromLocalStorage();
@@ -155,6 +184,7 @@ function updateTaskCompletionStatus(taskTitle) {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
+// Edit task function
 function editTask(task) {
     document.getElementById('task-title').value = task.title;
     document.getElementById('task-description').value = task.description;
@@ -162,6 +192,6 @@ function editTask(task) {
     document.getElementById('task-category').value = task.category;
     document.getElementById('task-priority').value = task.priority;
 
-    // Remove the old task and update it with the edited one when the form is submitted
-    removeTaskFromLocalStorage(task.title);
+    isEditing = true; // Set editing state to true
+    currentTaskTitle = task.title; // Store current task title for reference
 }
