@@ -33,6 +33,7 @@ document.getElementById('task-form').addEventListener('submit', function(event) 
     document.getElementById('task-priority').value = '';
 });
 
+// Search functionality
 document.getElementById('search-task').addEventListener('input', function() {
     const searchValue = this.value.toLowerCase();
     const tasks = document.querySelectorAll('#task-list li');
@@ -46,7 +47,7 @@ document.getElementById('search-task').addEventListener('input', function() {
     });
 });
 
-// Filter buttons event listeners
+// Filter functionality
 document.getElementById('filter-all').addEventListener('click', function() {
     filterTasks('');
 });
@@ -74,7 +75,6 @@ function filterTasks(category) {
 
 function addTaskToList(task) {
     const listItem = document.createElement('li');
-    listItem.classList.add(task.priority.toLowerCase() + '-priority');
     listItem.innerHTML = `<span><strong>${task.title}</strong>: ${task.description} <br> <em>Due: ${task.dueDate} | Category: ${task.category}</em></span>`;
 
     const checkButton = document.createElement('button');
@@ -89,6 +89,7 @@ function addTaskToList(task) {
     deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
     deleteButton.classList.add('delete-btn');
 
+    // Event listeners for buttons
     checkButton.addEventListener('click', function() {
         listItem.classList.toggle('completed');
         updateTaskCompletionStatus(task.title);
@@ -108,23 +109,6 @@ function addTaskToList(task) {
     listItem.appendChild(deleteButton);
 
     document.getElementById('task-list').appendChild(listItem);
-}
-
-function editTask(taskTitle) {
-    let tasks = getTasksFromLocalStorage();
-    let taskToEdit = tasks.find(task => task.title === taskTitle);
-
-    if (taskToEdit) {
-        document.getElementById('task-title').value = taskToEdit.title;
-        document.getElementById('task-description').value = taskToEdit.description;
-        document.getElementById('task-due-date').value = taskToEdit.dueDate;
-        document.getElementById('task-category').value = taskToEdit.category;
-        document.getElementById('task-priority').value = taskToEdit.priority;
-
-        // Remove the old task
-        removeTaskFromLocalStorage(taskToEdit.title);
-        document.querySelector(`li:contains("${taskTitle}")`).remove(); // Remove from UI
-    }
 }
 
 // Local storage functions
@@ -163,4 +147,8 @@ function updateTaskCompletionStatus(taskTitle) {
         }
     });
     localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+function editTask(taskTitle) {
+    // Add your edit functionality here (you could repopulate the form inputs and update the task)
 }

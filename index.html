@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Management System</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <script defer src="script.js"></script>
+    <title>Task Management System</title>
 </head>
 <body>
     <div class="container">
@@ -13,27 +14,37 @@
         <form id="task-form">
             <input type="text" id="task-title" placeholder="Task Title" required>
             <textarea id="task-description" placeholder="Task Description" required></textarea>
-            <input type="date" id="task-due-date">
-            <select id="task-category">
+            <input type="date" id="task-due-date" required>
+            <select id="task-category" required>
+                <option value="" disabled selected>Select Category</option>
                 <option value="Work">Work</option>
                 <option value="Personal">Personal</option>
                 <option value="Urgent">Urgent</option>
+                <option value="Others">Others</option>
             </select>
-            <select id="task-priority">
-                <option value="Low">Low</option>
-                <option value="Medium">Medium</option>
+            <select id="task-priority" required>
+                <option value="" disabled selected>Select Priority</option>
                 <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
             </select>
             <button type="submit">Add Task</button>
         </form>
+
+        <!-- Task Search -->
         <input type="text" id="search-task" placeholder="Search tasks...">
-        <div class="filter-buttons">
+
+        <!-- Task Filters -->
+        <div class="filters">
             <button id="filter-all">All</button>
             <button id="filter-work">Work</button>
             <button id="filter-personal">Personal</button>
             <button id="filter-urgent">Urgent</button>
         </div>
+
+        <h2>Task List</h2>
         <ul id="task-list"></ul>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
