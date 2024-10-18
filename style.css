@@ -1,10 +1,11 @@
 /* General body styling */
 body {
-    font-family: 'Poppins', sans-serif; 
+    font-family: 'Poppins', sans-serif;
     background-color: #f7f9fc;
     margin: 0;
     padding: 20px;
-    color: #2c3e50; 
+    color: #2c3e50;
+    font-size: 10px;
 }
 
 /* Container Styling */
@@ -12,23 +13,16 @@ body {
     max-width: 700px;
     margin: 0 auto;
     background: #ffffff;
-    padding: 30px;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-}
-
-.container:hover {
-    transform: scale(1.02);
 }
 
 /* Heading Styles */
 h1, h2 {
     text-align: center;
-    color: #34495e; 
-    font-weight: 700; 
+    color: #34495e;
     margin-bottom: 20px;
-    letter-spacing: 1px;
 }
 
 /* Form Styling */
@@ -38,41 +32,27 @@ form {
     margin-bottom: 25px;
 }
 
-input, textarea {
-    margin-bottom: 15px;
-    padding: 15px;
+input, textarea, select {
+    margin-bottom: 10px;
+    padding: 10px;
     border: 1px solid #bdc3c7;
     border-radius: 8px;
     background-color: #ecf0f1;
-    font-size: 16px;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: border-color 0.3s ease, 
-    box-shadow 0.3s ease;
-    font-family: 'Poppins', sans-serif; 
-} /* This closing bracket was missing */
-
-input:focus, textarea:focus {
-    border-color: #9b59b6;
-    box-shadow: 0 0 8px rgba(155, 89, 182, 0.5); 
-    outline: none;
+    font-size: 10px;
 }
 
-/* Button Styling */
 button {
-    padding: 12px;
-    background-color: #9b59b6;
+    padding: 10px;
+    background-color: #3498db;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
 }
 
 button:hover {
-    background-color: #8e44ad; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    background-color: #2980b9;
 }
 
 /* Task List Styling */
@@ -83,95 +63,50 @@ ul {
 
 li {
     background: #f0f4f8;
-    padding: 15px;
-    margin-bottom: 15px;
+    padding: 10px;
+    margin-bottom: 10px;
     border-radius: 8px;
-    position: relative;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: background-color 0.3s ease;
-    font-family: 'Poppins', sans-serif;
 }
 
-/* Icon before task items */
-li:before {
-    content: '\f058';
-    font-family: 'FontAwesome';
-    color: #2ecc71;
-    font-size: 16px;
-    position: absolute;
-    left: -30px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-/* Completed task styling */
-li.completed {
+li.completed .task-details {
     text-decoration: line-through;
-    color: #95a5a6;
-    background-color: #e5e7ea;
-    transition: color 0.3s ease, background-color 0.3s ease;
-}
-
-.completed {
     opacity: 0.7;
 }
 
-/* Button styling for actions (complete, edit, delete) */
-.complete-btn, .edit-btn, .delete-btn {
+/* Task details styling */
+.task-details {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+/* Buttons inside each task item */
+button.complete-btn, button.edit-btn, button.delete-btn {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 12px;
     margin-left: 10px;
-    transition: color 0.3s ease;
-    color: #7f8c8d; 
-}
-
-.complete-btn:hover, .edit-btn:hover, .delete-btn:hover {
-    color: #34495e; 
-}
-
-.delete-btn:hover {
-    color: #e74c3c; 
-}
-/* Style for the date input */
-input[type="date"] {
-    margin-bottom: 15px;
-    padding: 12px;
-    border: 1px solid #bdc3c7;
-    border-radius: 5px;
-    background-color: #ecf0f1;
-    font-size: 16px;
-}
-
-/* Style for the select input */
-select {
-    margin-bottom: 15px;
-    padding: 12px;
-    border: 1px solid #bdc3c7;
-    border-radius: 5px;
-    background-color: #ecf0f1;
-    font-size: 16px;
-}
-/* Footer Styling */
-footer {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 14px;
     color: #7f8c8d;
-    font-family: 'Poppins', sans-serif;
 }
 
-footer a {
-    color: #3498db;
-    text-decoration: none;
-    transition: color 0.3s ease;
+button.complete-btn:hover {
+    color: #2ecc71;
 }
 
-footer a:hover {
-    text-decoration: underline;
-    color: #2980b9;
+button.edit-btn:hover {
+    color: #e67e22;
+}
+
+button.delete-btn:hover {
+    color: #e74c3c;
+}
+
+.task-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: auto;
 }
